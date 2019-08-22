@@ -2,6 +2,7 @@
 from clustering import cluster
 from tabulate import tabulate
 from faker import generate
+from scoring import score
 faces, keyfobs = generate()
 print("FACES")
 print(tabulate(faces, headers=['Face ID', 'Timestamp']))
@@ -20,4 +21,7 @@ print(tabulate(new_groups, headers=['Faces In Group', 'Keyfob ID']))
 # Second, use scoring.
 # Scoring is like this:
 # [[face_id, keyfob_id, score], ...]
-scores = []
+scores = score(groups)
+print("SCORES")
+print(tabulate(scores, headers=[
+      'Face ID', 'Keyfob ID', "Relationship Score"]))
