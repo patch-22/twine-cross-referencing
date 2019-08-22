@@ -31,6 +31,3 @@ def generate():
             current_timestamp += random.randint(0, 2)
             faces.append([face, current_timestamp])
     return faces, keyfobs
-
-
-print(generate())
