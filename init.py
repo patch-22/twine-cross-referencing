@@ -3,7 +3,10 @@ from clustering import cluster
 from tabulate import tabulate
 from faker import generate
 from scoring import score
-faces, keyfobs = generate()
+from guess import guess
+faces, keyfobs, identities = generate()
+faces2 = faces.copy()
+keyfobs2 = keyfobs.copy()
 print("FACES")
 print(tabulate(faces, headers=['Face ID', 'Timestamp']))
 print("KEYFOBS")
@@ -25,3 +28,12 @@ scores = score(groups)
 print("SCORES")
 print(tabulate(scores, headers=[
       'Face ID', 'Keyfob ID', "Relationship Score"]))
+print("ACTUAL IDENTITIES (KEPT SECRET)")
+print(tabulate(identities, headers=[
+      'Face ID', 'Keyfob ID']))
+faces2 = list(set([x[0] for x in faces2]))
+keyfobs2 = list(set([x[0] for x in keyfobs2]))
+guesses = guess(faces2, keyfobs2, scores)
+print("GUESSED IDENTITIES")
+print(tabulate(guesses, headers=[
+      'Face ID', 'Keyfob ID']))
