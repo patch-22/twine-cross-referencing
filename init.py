@@ -28,12 +28,20 @@ scores = score(groups)
 print("SCORES")
 print(tabulate(scores, headers=[
       'Face ID', 'Keyfob ID', "Relationship Score"]))
-print("ACTUAL IDENTITIES (KEPT SECRET)")
-print(tabulate(identities, headers=[
-      'Face ID', 'Keyfob ID']))
 faces2 = list(set([x[0] for x in faces2]))
 keyfobs2 = list(set([x[0] for x in keyfobs2]))
 guesses = guess(faces2, keyfobs2, scores)
-print("GUESSED IDENTITIES")
-print(tabulate(guesses, headers=[
-      'Face ID', 'Keyfob ID']))
+newguesses = []
+for guess in guesses:
+    found = "-"
+    nextOne = ["-", "-"]
+    i = 0
+    while nextOne[0] != guess[0] and i < len(identities):
+        # Find the matching identity and guess.
+        nextOne = identities[i]
+        i += 1
+    guess.append(nextOne[1])
+    newguesses.append(guess)
+print("IDENTITIES")
+print(tabulate(newguesses, headers=[
+      'Face ID', 'Keyfob ID', 'Guessed Keyfob ID']))

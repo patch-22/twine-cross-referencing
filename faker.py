@@ -23,7 +23,7 @@ def generate():
     faces = []
     keyfobs = []
     current_timestamp = 0
-    for i in range(random.randint(10, 2000)):
+    for i in range(200):
         current_timestamp += random.randint(1, 100)
         # Pick a random identity
         identity = identities[random.randint(0, 9)]
